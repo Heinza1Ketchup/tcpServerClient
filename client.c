@@ -9,42 +9,42 @@
 
 
 int main(){
-   	 int sockfd, portno, n;
-	 struct sockaddr_in serv_addr;
-	 struct hostent *server;
+	int sockfd, portno, n;
+	struct sockaddr_in serv_addr;
+	struct hostent *server;
 
-	 char buffer[4096];
-	 char *host = "csweb01.csueastbay.edu";
+	char buffer[4096];
+	char *host = "csweb01.csueastbay.edu";
 	int uinput = 0;
 	//
-	 printf("press 1) to select  http://csweb01.csueastbay.edu/~td4679/Pgm3/start.html: " );
+	printf("press 1) to select  http://csweb01.csueastbay.edu/~td4679/Pgm3/start.html: " );
 	scanf("%d", &uinput);
 
 	//
 	if(uinput = 1){
-	 portno = 80;
-   	 sockfd = socket(AF_INET, SOCK_STREAM, 0);
-  	 if (sockfd < 0) 
-	 	error("ERROR opening socket");
- 	 server = gethostbyname(host);
- 	 if (server == NULL) {
- 	 	fprintf(stderr,"ERROR, no such host\n");
+	portno = 80;
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	if (sockfd < 0) 
+		error("ERROR opening socket");
+	server = gethostbyname(host);
+	if (server == NULL) {
+		fprintf(stderr,"ERROR, no such host\n");
  	 	exit(0);
- 	 }
- 	 bzero((char *) &serv_addr, sizeof(serv_addr));
- 	 serv_addr.sin_family = AF_INET;
- 	 bcopy((char *)server->h_addr, 
-         (char *)&serv_addr.sin_addr.s_addr,
-      	 server->h_length);
-         serv_addr.sin_port = htons(portno);
-  	 if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) error("ERROR connecting");
-  	 const char * request = "GET http://csweb01.csueastbay.edu/~td4679/Pgm3/start.html HTTP/1.0\r\n\r\nConnection: close\r\n\r\n";
-  	 n = write(sockfd,request,strlen(request));
-  	 if (n < 0) error("ERROR writing to socket");
-  	 bzero(buffer,4096);
+ 	}
+ 	bzero((char *) &serv_addr, sizeof(serv_addr));
+ 	serv_addr.sin_family = AF_INET;
+ 	bcopy((char *)server->h_addr, 
+        (char *)&serv_addr.sin_addr.s_addr, 
+	server->h_length);
+	serv_addr.sin_port = htons(portno);
+  	if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) error("ERROR connecting");
+	const char * request = "GET http://csweb01.csueastbay.edu/~td4679/Pgm3/start.html HTTP/1.0\r\n\r\nConnection: close\r\n\r\n";
+  	n = write(sockfd,request,strlen(request));
+  	if (n < 0) error("ERROR writing to socket");
+  	bzero(buffer,4096);
   	
-	 n = read(sockfd,buffer,4095);
-  	 if (n < 0) error("ERROR reading from socket");
+	n = read(sockfd,buffer,4095);
+  	if (n < 0) error("ERROR reading from socket");
 	printf("%d", strlen(buffer));
 	//
 	int x, idx = 0;
@@ -54,8 +54,7 @@ int main(){
 	char hlink[3][25];
 	char buff[4096] = "";
         for(x = 0; x < strlen(buffer); x++){
-	
-                if(buffer[x] == '<')
+		if(buffer[x] == '<')
                         opened = 1;
 		if(opened == 0 )
 			buff[idx++] = buffer[x];
@@ -194,9 +193,9 @@ int main(){
 	         serv_addr.sin_port = htons(portno);
 	         if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) error("ERROR connecting");
 		 strcpy(r, addr);
-		strcat(r, hlink[uinput-1]);
-		strcat(r, closing);
-		printf("%s", r);
+		 strcat(r, hlink[uinput-1]);
+		 strcat(r, closing);
+		 printf("%s", r);
 		 const char * request = r; //"GET http://csweb01.csueastbay.edu/~td4679/Pgm3/camp.html HTTP/1.0\r\n\r\nConnection: close\r\n\r\n";
 		 n = write(sockfd,request,strlen(request));
 	         if (n < 0) error("ERROR writing to socket");
@@ -360,7 +359,7 @@ int main(){
          if (n < 0) error("ERROR reading from socket");
          printf("%d\n", (int)strlen(buffer));
 	//
-	idx = 0;
+	 idx = 0;
                 y; z = 1;
                 opened= 0;
                 flag1 = 0; flag2 = 0;count = 0; c1 = 0;
@@ -406,96 +405,15 @@ int main(){
 
 		break;		
 		}
-	
 		default:{
 			uinput = 5;
 			break;
 		}
-	
-
 	}
 	
 	}	
 	//
 	}
-
 	
-
-  	 return 0;
-
-	
+  	 return 0;	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
